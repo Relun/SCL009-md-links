@@ -1,5 +1,5 @@
 {
-  "name": "md-links",
+  "name": "clau-md-links",
   "version": "0.1.0",
   "dependencies": {
     "eslint-plugin-jest": "^22.7.1",
