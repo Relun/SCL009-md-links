@@ -4,6 +4,10 @@ El programa es capaz de revisar archivos md y extraer los links que se encuentre
 
 ## Instrucciones
 
+Lo primero es instalar la librería con el siguiente comando:
+
+npm i clau-md-links
+
 El usuario solo debe escribir en la terminal "md-links" junto con el nombre del archivo, para que se ejecute el programa y pueda ver los links que se encuentren en el archivo md seleccionado.
 
 Luego se podrá ver en la terminal como se muestra en el siguiente ejemplo:
