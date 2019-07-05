@@ -1,6 +1,6 @@
 const fs = require('fs'); //llama a node.js
 const marked = require('marked'); //llama a libreia marked instalada, crea nuevas instancias (links)
-//const FileHound = require('filehound'); // libreria filehound recorre y lee directorios
+const FileHound = require('filehound'); // libreria filehound recorre y lee directorios
 //de node, lee los archivos, pasa una ruta y un callback(error y data)
 //conesto estamos leyendo una ruta aca es la prueba.md
 /*
@@ -12,9 +12,36 @@ fs.readFile('./prueba.md','utf8', (err, data) => {
   console.log(data);
 });*/
 
+let dir = process.argv[2];
+console.log(process.argv[2],process.argv[3]);
+
+
+//filehound encuentra archivo md de un directorio
+//metió dentro de una promesa el filehound
+const seeDirectories = (path) => {
+ return new Promise((resolve, reject)=> {
+  FileHound.create()
+  .paths(path)
+  .ext('md')
+  .find()
+  .then(res=>{
+    res.forEach(file => {
+      readlinks(file)
+      .then(res=>{
+        resolve(res)
+      })
+      .catch(err=>{
+        reject(err)
+      })
+    })
+})
+ })
+};
+
 //AQUI LEE LOS ARCHIVOS Y CREA EL ARRAY
 //esta const no deberia estar en index si en md-links
-let path = './prueba.md';
+
+//let path = './prueba.md'
 const readlinks = (path) => {
   
   return new Promise((resolve, reject) => {
@@ -45,16 +72,8 @@ console.log(links)
   })
 })
 }
-// //le pasamos la ruta que queremos que revise la fn links
-//const directories = (paths) =>{
-/* FileHound.create()
-  .paths('/SCL009-md-links')
-  .ext('md')
-  .find()
-  .then(links => {
-  links.forEach(file => console.log('Found file', file));
-});*/
-readlinks(path)
+
+seeDirectories(dir)
 .then(res=>{
   console.log(res);
 })
@@ -64,3 +83,4 @@ readlinks(path)
 //readlinks('./prueba.md');
 
 module.exports.readlinks = readlinks;
+module.exports.seeDirectories = seeDirectories;
