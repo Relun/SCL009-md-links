@@ -3,21 +3,12 @@ const marked = require('marked'); //llama a libreia marked instalada, crea nueva
 const FileHound = require('filehound'); // libreria filehound recorre y lee directorios
 //de node, lee los archivos, pasa una ruta y un callback(error y data)
 //conesto estamos leyendo una ruta aca es la prueba.md
-/*
-fs.readFile('./prueba.md','utf8', (err, data) => {
-  if (err) {//si error es true, lanza error(throw) utf8 es para el lenguaje humano
-  throw err;
-}
-//sino hay error manda console
-  console.log(data);
-});*/
 
 let dir = process.argv[2];
 console.log(process.argv[2],process.argv[3]);
 
-
 //filehound encuentra archivo md de un directorio
-//metió dentro de una promesa el filehound
+
 const seeDirectories = (path) => {
  return new Promise((resolve, reject)=> {
   FileHound.create()
@@ -39,7 +30,6 @@ const seeDirectories = (path) => {
 };
 
 //AQUI LEE LOS ARCHIVOS Y CREA EL ARRAY
-//esta const no deberia estar en index si en md-links
 
 //let path = './prueba.md'
 const readlinks = (path) => {
