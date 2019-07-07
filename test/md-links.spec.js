@@ -1,4 +1,4 @@
-
+/*
 const readlinks = require('../md-links');
 describe('readlinks', () => {
   it('Debería retornar 5 links que se encuentran en el archivo prueba.md', async() => {    
@@ -10,6 +10,8 @@ describe('readlinks', () => {
       {href: 'https://nodejs.org/api/path.html',text:'Path', file:'./prueba.md'}]);
   });
 });
+*/
+
 
 /*test("Should be 'serial experiments' user", () => {
   expect(functions.returnUser())
