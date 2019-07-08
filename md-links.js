@@ -1,18 +1,15 @@
 const fs = require('fs'); //llama a node.js
 const marked = require('marked'); //llama a libreia marked instalada, crea nuevas instancias (links)
-const FileHound = require('filehound');
+const fileHound = require('filehound');// libreria filehound recorre y lee directorios
 const nodepath = require('path');
-const fetch = require('node-fetch');// libreria filehound recorre y lee directorios
+const fetch = require('node-fetch');
 //de node, lee los archivos, pasa una ruta y un callback(error y data)
 //conesto estamos leyendo una ruta aca es la prueba.md
 
-
-
 //console.log(process.argv[2],process.argv[3]);
 //route2 = path.resolve(route);
-//filehound encuentra archivo md de un directorio
 
-//para llamar a la funcion archivo o directorio
+//para llamar a la funcion archivo o directorio con la validación
 const mdLinks = (path,options) => {
 if(options && options.validate){
   return new Promise ((resolve, reject) => {
@@ -20,16 +17,15 @@ if(options && options.validate){
     seeDirectories(path)
 
     .then((path2)=> {
-      Promise.all(path2.map((entrydirectory)=>{
-        return readlinks(entrydirectory);
+      Promise.all(path2.map((enterDirectory)=>{
+        return readlinks(enterDirectory);
 
       })).then((linkInsideDirectory)=>{
         Promise.all(linkInsideDirectory.map((linkInsideDirectory) =>{
           return validation(linkInsideDirectory);
 
         })).then((validation)=>{
-          resolve(validation);
-        
+          resolve(validation);  
         
       })
     });
@@ -64,8 +60,6 @@ if(options && options.validate){
 
 }
  
-
-
 //validación
 
 const validation = (links) =>{
@@ -90,10 +84,9 @@ const validation = (links) =>{
 }
 //AQUI LEE LOS ARCHIVOS Y CREA EL ARRAY
 
-//let path = './prueba.md'
 const readlinks = (path) => {
-  //extnameobtiene la extension de una ruta del archivo
-  //tryseñala bloque de instrucciones a intentar, si no es try, es catch
+  //extname obtiene la extension de una ruta del archivo
+  //try señala bloque de instrucciones a intentar, si no es try, es catch
   return new Promise((resolve, reject) => {
     try{
     if(nodepath.extname(path)!=".md"){
@@ -134,9 +127,10 @@ catch(error){
 }
 //readlinks('./prueba.md');
 
+//filehound encuentra archivo md de un directorio
 
 const seeDirectories = (path) => {
-  return FileHound.create()
+  return fileHound.create()
    .paths(path)
    .ext('md')
    .find();

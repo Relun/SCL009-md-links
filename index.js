@@ -6,8 +6,6 @@
 
 const mdLinks = require('./md-links');
 
-
-
 if((process.argv[3]==="validate"));
 mdLinks.mdLinks(process.argv[2],{validate:true})
 .then((links) => {
